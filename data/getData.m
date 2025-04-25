@@ -31,4 +31,8 @@ for i = 3:length(files)
     save("data", name, '-append');
 end
 
+%% Other paramaters
+mu = 1.32712440018e11; % [km³/s²] Gravitational parameter for the sun
+save("data", mu, '-append');
+
 clear;
