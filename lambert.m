@@ -1,4 +1,4 @@
-function v1 = lambert(r1, r2, dt, mu)
+function [v1, v2] = lambert(r1, r2, dt, mu)
     % Function to solve for the lambert problem. For each value of R1 and
     % R2 (space positions), find a orbit that passes thought both points
     % with a flight time of dt.
@@ -16,10 +16,12 @@ function v1 = lambert(r1, r2, dt, mu)
         r1 (3,:) double
         r2 (3,:) double
         dt (1,:) duration
-        mu (1,:) double
+        mu (1,1) double
     end
 
     %% Main
+    fprintf("Calling Lmabert solver.\n");
+
     input_filename = fullfile("lambert", "lambert_input.dat");
     output_file = fullfile("lambert", "lambert_output.dat");
 
@@ -35,5 +37,8 @@ function v1 = lambert(r1, r2, dt, mu)
     !lambert\lambert_solver.exe
 
     % Take the output results
-    v1 = importdata(output_file)';
+    vi = importdata(output_file)';
+    v1 = vi(1:3,:); v2 = vi(4:6,:);
+    fprintf("Ending function.\n");
+
 end

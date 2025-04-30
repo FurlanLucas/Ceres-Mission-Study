@@ -1,4 +1,4 @@
-function fig = plotOrbit(bodies, ti, tf, nt)
+function fig = plotOrbit(bodies, ti, tf, nt, mu)
     % Plot the orbit in space of body, between the instants ti and tf,
     % dividing the time interval in nt points.
 
@@ -18,7 +18,7 @@ function fig = plotOrbit(bodies, ti, tf, nt)
     for j = 1:length(bodies)
         pos = zeros(3, nt);
         for i = 1:nt
-            pos(:,i) = propagate(bodies(j), t(i));
+            pos(:,i) = propagate(bodies(j), t(i), mu);
         end
         plot3(pos(1,:)/1e6, pos(2,:)/1e6, pos(3,:)/1e6, bodiesColor(j), ...
             DisplayName=bodies(j).name);

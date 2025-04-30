@@ -21,7 +21,7 @@ program lambert_solver
       if (ios /= 0) exit  ! Exit loop on end-of-file or error
 
       call solve_lambert_izzo(r1, r2, dt, mu, .false., 0, v1, v2, status_ok)
-      write(out_id, "(3F15.6)") v1(1,1), v1(2,1), v1(3,1)
+      write(out_id, "(3F15.6)", advance="no") v1(1,1), v1(2,1), v1(3,1)
       call solve_lambert_izzo(r1, r2, dt, mu, .true., 0, v1, v2, status_ok)
       write(out_id, "(3F15.6)") v1(1,1), v1(2,1), v1(3,1)
 

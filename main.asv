@@ -6,21 +6,22 @@ muE = G*(Ms + Me); % Gravitational parameter for Earth
 muC = G*(Ms + Mc); % Gravitational parameter for Ceres
 
 initialDate = datetime(2007, 9, 1, 10, 12, 28); % Yr, Mon, Day, Hr, Min, Sec
+days = linspace(100, 365)
+days_f = 84; % Final flight time
 nf = 1e4; % Number of flight time divisions
-flightDays = linspace(100, 4*365, nf); % Time of flight in days
 
 %% Main calculations
 % Initial and final positions
-[Rearth0, Vearth0] = propagate(earth, initialDate, muE);
+[Rearth0, Vearth0] = propagate(earth, initialDate, mu);
 Rearth0 = Rearth0*ones([1,nf]); Vearth0 = Vearth0*ones([1,nf]);
 
 % Final date
-flightTime = duration(flightDays*24, 0, 0); % Hr, min, Sec
+flightTime = linspace(duration(days_i,0,0), duration(days_f,0,0), nf);
 finalDate = initialDate + flightTime;
 
 % Earth and ceres positions
-[Rceres1, Vceres1] = propagate(ceres, finalDate, muC);
-[Rearth1, ~] = propagate(earth, finalDate, muE);
+[Rceres1, Vceres1] = propagate(ceres, finalDate, mu);
+[Rearth1, ~] = propagate(earth, finalDate, mu);
 
 % Spacecraft orbital elements
 [V1, V2] = lambert(Rearth0, Rceres1, flightTime, mu);

@@ -55,6 +55,6 @@ function [body, T2] = getElements(R, V, t0, mu)
     end
 
     body = struct('A', a, 'IN', rad2deg(i), 'EC', norm(e), ...
-        'OM', rad2deg(OM), 'W', rad2deg(w), 'Tp', Tp, 'mu', mu);
+        'OM', rad2deg(OM), 'W', rad2deg(w), 'Tp', Tp);
 
 end
