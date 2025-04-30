@@ -20,12 +20,11 @@ function [v1, v2] = lambert(r1, r2, dt, mu)
     end
 
     %% Main
-    fprintf("Calling Lmabert solver.\n");
-
     input_filename = fullfile("lambert", "lambert_input.dat");
     output_file = fullfile("lambert", "lambert_output.dat");
 
     % Write the input files
+    fprintf("\tWriting to file.\n");
     file_id = fopen(input_filename, 'w');
     for i = 1:length(dt)
         fprintf(file_id, "%.15e, %.15e, %.15e, %.15e, %.15e, %.15e, " + ...
@@ -34,6 +33,7 @@ function [v1, v2] = lambert(r1, r2, dt, mu)
     fclose(file_id);
 
     % Solve the Lambert problem
+    fprintf("\tCalling Lambert program.\n");
     !lambert\lambert_solver.exe
 
     % Take the output results
